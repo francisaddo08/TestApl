@@ -1,0 +1,79 @@
+﻿@page
+@using APL_Technical_Test.data.entities
+
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+@{
+    var image = (ImageInformation) ViewData["infor"];
+}
+
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12 col-lg-8 offset-lg-2">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UploadImage" class="control-label"></label>
+                <input type="file" asp-for="UploadImage" accept = ".jpg, .png" class="form-control" required  />
+                <span asp-validation-for="UploadImage" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="readURL(this)" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@*============================================================================================*@
+@if (@Model.imageName != null)
+{
+    <div class="row">
+        <div class="col-md-12 col-12 col-sm-12 col-lg-8 offset-lg-2">
+            <div class="container">
+                <h2>Image</h2>
+                <img class="img-responsive" src="~/uploads/@Model.imageName" alt="" width="460" height="345"> 
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-12 col-sm-12 col-lg-8 offset-lg-2">
+            <div class="container">
+                   <dl>
+  <dt>Image Name</dt>
+  <dd>@Model.imageInfor.ImageName</dd>
+  <dt>Dimensions</dt>
+  <dd>@Model.imageInfor.Dimensions
+</dl>
+            </div>
+
+
+        </div>
+    </div>
+    @* ************************TABLE*****************************************@
+ 
+<p>@ViewData["mimetype"] </p>
+                                    
+    
+  <p>  @ViewData["fileData"] </p>
+
+}
+
+@if(@Model.errorMessage){
+    <div class="row">
+        <div class="col-md-12 col-12 col-sm-12 col-lg-8 offset-lg-2">
+            <div class="container">
+              @Model.imageOverSizeMessage 
+              @Model.wrongImageTypeErrorMessage 
+            </div>
+
+
+        </div>
+    </div>
+
+}
