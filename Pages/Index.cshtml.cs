@@ -104,7 +104,7 @@ namespace APL_Technical_Test.Pages
                                 ViewData["fileData"] = fileData;
                                 Azure.Service.AzureStorageService objBlobService = new Azure.Service.AzureStorageService();
                                 var imagePathOnAzure = objBlobService.UploadFileToBlob(this.imageName, fileData, mimeType);
-                                if (true)
+                                if (imagePathOnAzure != "")
                                 {
                                     this.errorMessage = false;
                                     this.imageInfor.AzureUrl = imagePathOnAzure;
